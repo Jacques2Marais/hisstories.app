@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 
 import Button, { ButtonVariant } from '../components/Button/Button.astro';
 import Hero from '../components/Hero/Hero.astro';
-import Section from '../components/Section/Section.astro';
+import FeatureSection from '../components/Section/Section.astro';
 ---
 
 <Layout title="Welcome to His Stories.">
@@ -14,10 +14,11 @@ import Section from '../components/Section/Section.astro';
 			<img slot="image" src="/people.jpg" alt="A crowd of people." class="rounded-xl" />
 			
 			<Button slot="actions">Share your story</Button>
-			<Button slot="actions" variant={ButtonVariant.Ghost}>Read other stories</Button>
+			<Button slot="actions" variant={ButtonVariant.Ghost}>Read stories</Button>
 		</Hero>
-		<Section>
+		<FeatureSection>
 			<h1 slot="title" class="">Share your story with others</h1>
-		</Section>
+			<p slot="description">You have a story to tell of what God has done in your life. Sharing your story can encourage others and be a great testimony.</p>
+		</FeatureSection>
 	</main>
 </Layout>
