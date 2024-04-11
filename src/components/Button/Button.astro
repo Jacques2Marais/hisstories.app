@@ -1,0 +1,31 @@
+---
+export enum ButtonVariant {
+    Primary,
+    Ghost
+}
+
+interface Props {
+    variant? : ButtonVariant;
+}
+
+const { variant = ButtonVariant.Primary } = Astro.props
+
+function getVariantClassName (variant : ButtonVariant) {
+    switch (variant) {
+        case ButtonVariant.Primary: 
+            return "bg-hs-red-60 hover:bg-hs-red-70 text-white";
+        case ButtonVariant.Ghost:
+            return "bg-transparent opacity-80 hover:opacity-100 hover:bg-hs-red-80/10 hover:text-hs-red-80";
+    }
+}
+
+const buttonClassName = `
+    ${getVariantClassName (variant)}
+    px-3 py-1.5 rounded-md
+    transition-all duration-100
+`
+---
+
+<button class={buttonClassName}>
+    <slot />
+</button>
