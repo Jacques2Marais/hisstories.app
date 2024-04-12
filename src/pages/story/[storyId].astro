@@ -1,3 +1,10 @@
 ---
 const { storyId } = Astro.params;
+const storyIdNumber = parseInt(storyId, 10);
+
+import { db, eq, Story } from 'astro:db';
+const story = await db.select().from(Story).where(eq(Story.id, storyIdNumber));
 ---
+
+# Story {storyIdNumber}
+{story[0].body}

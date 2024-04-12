@@ -1,6 +1,17 @@
-import { db } from 'astro:db';
+import { db, Author, Story } from 'astro:db';
 
 // https://astro.build/db/seed
 export default async function seed() {
-	// TODO
+	await db.insert(Author).values([
+		{ id: 1, displayName: 'Jack Morris' },
+		{ id: 2, displayName: 'Gabby de Klerk' },
+		{ id: 3, displayName: 'Roeloff Boettger' },
+		{ id: 4, displayName: 'Hannah Quass' },
+	])
+
+	await db.insert(Story).values([
+		{ id: 1, authorId: 1, body: `Pariatur proident adipisicing sint reprehenderit. Aliquip sunt do consectetur laborum officia fugiat reprehenderit nulla duis. Irure fugiat in dolore quis. Anim ullamco duis exercitation deserunt elit anim et dolore. Minim laboris irure fugiat non ut Lorem magna. Nulla veniam duis sit ea elit pariatur enim laborum. Aliqua nisi cillum ex ex consequat fugiat esse veniam nulla proident ea. Aliquip nostrud do proident proident enim consequat consectetur exercitation non ullamco eu. Laborum ex ipsum mollit anim labore sit ipsum Lorem qui consectetur laboris mollit do. Et enim consectetur quis eiusmod Lorem enim aliquip incididunt et ad nostrud amet consectetur ad. Nisi culpa occaecat tempor labore sit pariatur ipsum excepteur cupidatat eiusmod aliquip. Tempor consectetur anim magna cupidatat magna deserunt aliquip proident. Velit nisi proident amet ipsum deserunt Lorem incididunt dolore magna nostrud sunt sunt. Pariatur ea eiusmod sint reprehenderit officia ad aliquip eiusmod incididunt est. Culpa aliquip sit quis esse est enim officia enim minim officia. Aliqua dolor do voluptate enim ea est irure sunt. Consectetur sint occaecat velit esse quis nulla veniam sit id laboris amet velit deserunt. Eiusmod elit aute eu Lorem id ad consectetur velit esse nulla pariatur excepteur.`, creationDate: new Date() },
+		{ id: 2, authorId: 2, body: `Cupidatat aute et aliquip irure velit mollit. Sunt do ea cillum cupidatat laborum quis ut consectetur velit. Proident elit aute amet cillum exercitation pariatur id non ipsum anim sit. Quis fugiat magna aliquip deserunt ex. Aute commodo consectetur dolor nulla pariatur aliquip reprehenderit cupidatat anim aliqua proident eu do exercitation. Ut sit commodo labore nostrud. Exercitation officia irure sit cillum enim officia aute et. Commodo mollit ad culpa laborum eu consectetur duis ut eu sit officia. Dolor reprehenderit mollit amet pariatur mollit reprehenderit exercitation laborum ullamco enim laboris irure in. Eiusmod enim aliquip labore eiusmod duis non ex ipsum laborum aute aute. Id in adipisicing irure sit sint. Ullamco ullamco qui laborum anim labore commodo fugiat. Officia exercitation cupidatat non ullamco sint laborum adipisicing aliquip velit occaecat. Do exercitation commodo cupidatat excepteur pariatur anim enim exercitation cupidatat Lorem anim Lorem. Sunt irure deserunt quis dolor. Commodo do mollit non consectetur incididunt fugiat minim consequat aliqua Lorem in ipsum et laboris.`, creationDate: new Date() },
+		{ id: 3, authorId: 3, body: `Ex laborum ut enim occaecat commodo aliqua quis Lorem elit do elit nulla. Nostrud officia nisi dolor tempor voluptate minim. Elit anim laboris sit qui ad enim pariatur excepteur commodo excepteur commodo nisi. Aliqua culpa consectetur quis esse consectetur qui. Minim mollit excepteur do consectetur mollit. Exercitation sunt enim non sit esse proident nulla tempor veniam adipisicing. Veniam eu ullamco mollit consequat qui pariatur et aliqua elit qui officia. Ex ipsum labore anim anim id commodo in veniam nulla do dolor. Officia eu ex sunt et voluptate minim aute ipsum esse est duis sit ipsum. In officia velit anim pariatur dolore sint duis nostrud ipsum sit fugiat. Minim veniam adipisicing cupidatat officia esse mollit culpa amet cupidatat enim. Incididunt quis ut laborum irure. Velit consequat excepteur irure eiusmod do amet eu occaecat dolore aliquip quis cillum.`, creationDate: new Date() },
+	])
 }

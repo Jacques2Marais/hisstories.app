@@ -2,7 +2,8 @@ import { column, defineDb, defineTable } from 'astro:db';
 
 const Author = defineTable({
   columns: {
-
+    id: column.number ({ primaryKey: true }),
+    displayName: column.text(),
   }
 })
 
@@ -11,7 +12,7 @@ const Author = defineTable({
 const Story = defineTable({
   columns: {
     id: column.number ({ primaryKey: true }),
-    author: column.text(),
+    authorId: column.number ({ references: () => Author.columns.id }),
     body: column.text(),
     creationDate: column.date()
   }
@@ -19,5 +20,8 @@ const Story = defineTable({
 
 // https://astro.build/db/config
 export default defineDb({
-  tables: {}
+  tables: {
+    Author,
+    Story
+  }
 });
