@@ -12,6 +12,7 @@ const Author = defineTable({
 const Story = defineTable({
   columns: {
     id: column.number ({ primaryKey: true }),
+    title: column.text(),
     authorId: column.number ({ references: () => Author.columns.id }),
     body: column.text(),
     creationDate: column.date()

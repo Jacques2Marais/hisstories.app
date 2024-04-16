@@ -1,10 +1,26 @@
 ---
+import Layout from '../../layouts/Layout.astro';
+
 const { storyId } = Astro.params;
 const storyIdNumber = parseInt(storyId, 10);
 
-import { db, eq, Story } from 'astro:db';
+import { db, eq, Story, Author } from 'astro:db';
 const story = await db.select().from(Story).where(eq(Story.id, storyIdNumber));
+const author = await db.select().from(Author).where(eq(Author.id, story[0].authorId));
+const { title, body } = story[0];
+const { displayName : authorName } = author[0];
+
+function splitBody (body : string) {
+    return body.split("\n");
+}
 ---
 
-# Story {storyIdNumber}
-{story[0].body}
+<Layout title={`"${title}" by ${authorName} - His Stories`}>
+	<main class="min-h-screen flex flex-col items-center bg-hs-cream-10">
+        <header class="flex flex-col items-center justify-center text-center bg-hs-cream-20 xl:px-48 xl:py-24 w-full">
+            <h1 class="text-5xl font-bold text-hs-cream-90">{ title }</h1>
+            <p class="text-2xl text-hs-cream-70">by { authorName }</p>
+        </header>
+        <section class="xl:px-48 xl:py-24 w-2/3 flex flex-col gap-8 text-xl tracking-wider text-black/90">
+            { splitBody(body).map(paragraph => <p>{ paragraph }</p>) }
+        </section>
