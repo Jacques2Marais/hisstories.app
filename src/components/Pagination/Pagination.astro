@@ -1,0 +1,28 @@
+---
+const { currentPage, pageCount } = Astro.props;
+
+const pageNumbers = 
+    Array
+    .from({ length: pageCount }, (_, i) => i + 1)
+    .filter(pageNumber => 
+        pageNumber === 1 || 
+        pageNumber === pageCount || 
+        (pageNumber >= currentPage - 2 && pageNumber <= currentPage + 2)
+    );
+---
+
+<div class="flex gap-2 justify-end">
+    {
+        pageNumbers.map ((pageNumber, index) => {
+            let isGap = (index > 0) && (pageNumber > pageNumbers[index - 1] + 1);
+            let isCurrent = pageNumber === currentPage;
+
+            return (
+                <>
+                    {isGap && <span>...</span>}
+                    <a class={`bg-hs-red-20 hover:bg-hs-red-30 px-2.5 py-0.5 rounded-md transition-colors duration-150 ${isCurrent && "underline underline-offset-2"}`} href={`${pageNumber}`}>{pageNumber}</a>
+                </>
+            )
+        })
+    }
+</div>

@@ -1,0 +1,17 @@
+---
+const { title, author, description, storyId } = Astro.props;
+---
+
+<a class="flex flex-col gap-4 bg-hs-cream-20 px-8 py-6 rounded-md hover:bg-hs-cream-30 transition-colors duration-150" href={`/story/${storyId}`}>
+    <div class="flex flex-col">
+        <h1 class="text-2xl leading-7 font-bold text-hs-cream-90">{ title }</h1>
+        <h2 class="text-hs-cream-70"> { author }</h2>
+    </div>
+    <p class="text-hs-cream-90">{ description }</p>
+    <div class="flex gap-2 self-end items-center text-hs-cream-90">
+        <span class="self-start">Read story</span>
+        <span class="material-symbols-outlined self-end">
+            arrow_circle_right
+        </span>
+    </div>
+</a>

@@ -1,11 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
-const { storyId } = Astro.params;
-const storyIdNumber = parseInt(storyId, 10);
+const { storyId: storyIdParam } = Astro.params;
+const storyId = parseInt(storyIdParam, 10);
 
 import { db, eq, Story, Author } from 'astro:db';
-const story = await db.select().from(Story).where(eq(Story.id, storyIdNumber));
+const story = await db.select().from(Story).where(eq(Story.id, storyId));
 const author = await db.select().from(Author).where(eq(Author.id, story[0].authorId));
 const { title, body } = story[0];
 const { displayName : authorName } = author[0];

@@ -13,7 +13,7 @@ const { variant = ButtonVariant.Primary } = Astro.props
 function getVariantClassName (variant : ButtonVariant) {
     switch (variant) {
         case ButtonVariant.Primary: 
-            return "bg-hs-red-60 hover:bg-hs-red-70 text-white";
+            return "bg-hs-red-60 hover:bg-hs-red-70 text-white button-primary";
         case ButtonVariant.Ghost:
             return "bg-transparent opacity-80 hover:opacity-100 hover:bg-hs-red-80/10 hover:text-hs-red-80";
     }
@@ -29,3 +29,9 @@ const buttonClassName = `
 <button class={buttonClassName}>
     <slot />
 </button>
+
+<style>
+    .button-primary {
+        box-shadow: inset 0px 2px 0px 0px rgba(0,0,0,0.2), inset 0px -2px 0px 0px rgba(255, 255, 255, 0.3);
+    }
+</style>
