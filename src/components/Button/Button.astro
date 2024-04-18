@@ -6,9 +6,10 @@ export enum ButtonVariant {
 
 interface Props {
     variant? : ButtonVariant;
+    href?: string;
 }
 
-const { variant = ButtonVariant.Primary } = Astro.props
+const { variant = ButtonVariant.Primary, href } = Astro.props
 
 function getVariantClassName (variant : ButtonVariant) {
     switch (variant) {
@@ -26,9 +27,14 @@ const buttonClassName = `
 `
 ---
 
-<button class={buttonClassName}>
-    <slot />
-</button>
+{ href ?
+    <a class={buttonClassName} href={ href }><slot /></a>
+    : (
+        <button class={buttonClassName}>
+            <slot />
+        </button>
+    )
+}
 
 <style>
     .button-primary {

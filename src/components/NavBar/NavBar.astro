@@ -1,0 +1,12 @@
+---
+import Button, { ButtonVariant } from "../Button/Button.astro";
+import Logo from "../Logo/Logo.astro";
+---
+
+<nav class="flex px-8 py-4 absolute top-0 bg-transparent w-full items-center">
+    <Logo />
+    <div class="flex gap-4 items-center ml-auto">
+        <Button variant={ButtonVariant.Ghost} href="/stories/1">All stories</a>
+        <Button variant={ButtonVariant.Primary} href="/share">Share your story</a>
+    </div>
+</nav>

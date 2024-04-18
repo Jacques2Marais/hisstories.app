@@ -13,8 +13,8 @@ import FeatureSection from '../components/Section/Section.astro';
 			<p slot="description">Share the goodness of God in your life and encourage someone else.</p>
 			<img slot="image" src="/people.jpg" alt="A crowd of people." class="rounded-xl" />
 			
-			<Button slot="actions">Share your story</Button>
-			<Button slot="actions" variant={ButtonVariant.Ghost}>Read stories</Button>
+			<Button slot="actions" href="/share">Share your story</Button>
+			<Button slot="actions" variant={ButtonVariant.Ghost} href="/stories/1">Read stories</Button>
 		</Hero>
 		<FeatureSection>
 			<h1 slot="title" class="">Share your story with others</h1>
