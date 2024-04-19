@@ -1,0 +1,99 @@
+---
+import Button from "../components/Button/Button.astro";
+import Center from "../components/Center/Center.astro";
+import TextArea from "../components/TextArea/TextArea.astro";
+import TextField from "../components/TextField/TextField.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title={`Write Your Story - His Stories`}>
+    <Center>
+        <header class="flex flex-col gap-1">
+            <h1 class="text-4xl text-hs-cream-90">Write your story</h1>
+            <h2 class="text-hs-cream-70">Share the story God has told in your life with the world.</h2>
+        </header>
+        <form class="flex flex-col gap-3" id="storyform" action="/written" method="POST">
+            <TextField autofocus state="normal" id="title" placeholder="Enter a title">
+                <label slot="label" for="title">Story title</label>
+                <span style="display:none;" slot="error" id="titleerror">Please enter a title for your story.</span>
+            </TextField>
+            <TextArea id="story" placeholder="Enter your story" className="min-h-[40vh]">
+                <label slot="label" for="story">Your story</label>
+                <span slot="helper" id="storycount">At least 100 characters</span>
+                <span style="display:none;" slot="error" id="storyerror">Please enter a story that is at least 100 characters long.</span>
+            </TextArea>
+            <div class="flex justify-end">
+                <Button type="submit" variant="primary">Publish story</Button>
+            </div>
+        </form>
+
+        <script>
+            const titleInput = document.querySelector('#title') as HTMLInputElement;
+            const storyInput = document.querySelector('#story') as HTMLTextAreaElement;
+            const titleError = document.querySelector('#titleerror') as HTMLSpanElement;
+            const storyError = document.querySelector('#storyerror') as HTMLSpanElement;
+            const storyCount = document.querySelector('#storycount') as HTMLSpanElement;
+            const storyForm = document.querySelector('#storyform') as HTMLFormElement;
+
+            storyForm.addEventListener('submit', (event) => {
+                event.preventDefault(); 
+                const title = titleInput.value; 
+                const story = storyInput.value; 
+                
+                if (story.length < 100) { 
+                    storyError.style.display = 'block'; 
+                    storyInput.focus();
+                } else { 
+                    storyError.style.display = 'none'; 
+                } 
+                
+                if (title.length == 0) { 
+                    titleError.style.display = 'block'; 
+                    titleInput.focus();
+                } else { 
+                    titleError.style.display = 'none'; 
+                }
+                
+                if (title.length > 0 && story.length >= 100) { 
+                    storyForm.submit();
+                }
+            });
+
+            titleInput.addEventListener('blur', () => {
+                if (titleInput.value.length == 0) { 
+                    titleError.style.display = 'block'; 
+                }
+            });
+
+            storyInput.addEventListener('blur', () => {
+                if (storyInput.value.length < 100) { 
+                    storyError.style.display = 'block'; 
+                }
+            });
+
+            titleInput.addEventListener('input', () => {
+                if (titleInput.value.length > 0) { 
+                    titleError.style.display = 'none'; 
+                }
+            });
+
+            storyInput.addEventListener('input', () => {
+                const length = storyInput.value.length; 
+                
+                if (length == 0) { 
+                    storyCount.innerText = 'At least 100 characters'; 
+                } else if (length < 100 -1) { 
+                    storyCount.innerText = `At least ${100 - length} more characters`; 
+                } else if (length == 100 - 1) { 
+                    storyCount.innerText = 'At least 1 more character'; 
+                } else { 
+                    storyCount.innerText = ''; 
+                }
+
+                if (length >= 100) { 
+                    storyError.style.display = 'none'; 
+                }
+            });
+        </script>
+    </Center>
+</Layout>

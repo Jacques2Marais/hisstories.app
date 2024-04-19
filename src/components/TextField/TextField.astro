@@ -1,0 +1,32 @@
+---
+interface Props {
+    placeholder: string;
+    id: string;
+    state: 'normal' | 'error' | 'success';
+    autofocus?: boolean;
+    oninput?: string;
+}
+
+const { placeholder, id, state, autofocus = false, oninput } = Astro.props;
+
+function getStateClassName (state: Props['state']) {
+    switch (state) {
+        case 'error':
+            return 'border-red-500';
+        case 'success':
+            return 'border-green-500';
+        default:
+            return 'border-gray-200';
+    }
+} 
+---
+
+<div class="flex flex-col gap-0.5">
+    <div class="text-gray-800">
+        <slot name="label"></slot>
+    </div>
+    <input oninput={oninput} autofocus={autofocus} id={id} class="px-3 py-1.5 rounded-md transition-all duration-100 border-gray-200 focus-visible:border-gray-400 border outline-none" type="text" placeholder={placeholder} />
+    <div class="text-red-800">
+        <slot name="error"></slot>
+    </div>
+</div>

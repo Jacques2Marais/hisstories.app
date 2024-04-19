@@ -1,21 +1,20 @@
 ---
-export enum ButtonVariant {
-    Primary,
-    Ghost
-}
-
 interface Props {
-    variant? : ButtonVariant;
+    variant? : "primary" | "ghost" | "secondary";
     href?: string;
+    onclick?: string;
+    type?: "submit" | "reset" | "button";
 }
 
-const { variant = ButtonVariant.Primary, href } = Astro.props
+const { variant = "primary", href, onclick, type = "button" } = Astro.props
 
-function getVariantClassName (variant : ButtonVariant) {
+function getVariantClassName (variant : Props["variant"]) {
     switch (variant) {
-        case ButtonVariant.Primary: 
+        case "primary": 
             return "bg-hs-red-60 hover:bg-hs-red-70 text-white button-primary";
-        case ButtonVariant.Ghost:
+        case "secondary":
+            return "text-hs-red-90 hover:bg-hs-red-80/10";
+        case "ghost":
             return "bg-transparent opacity-80 hover:opacity-100 hover:bg-hs-red-80/10 hover:text-hs-red-80";
     }
 }
@@ -30,7 +29,7 @@ const buttonClassName = `
 { href ?
     <a class={buttonClassName} href={ href }><slot /></a>
     : (
-        <button class={buttonClassName}>
+        <button type={type} class={buttonClassName} onclick={ onclick }>
             <slot />
         </button>
     )
