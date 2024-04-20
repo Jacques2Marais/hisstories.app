@@ -1,4 +1,4 @@
-import { column, defineDb, defineTable } from 'astro:db';
+import { column, defineDb, defineTable, NOW } from 'astro:db';
 
 const Author = defineTable({
   columns: {
@@ -11,12 +11,12 @@ const Author = defineTable({
 
 const Story = defineTable({
   columns: {
-    id: column.number ({ primaryKey: true }),
+    id: column.number ({ primaryKey: true, unique: true }),
     title: column.text(),
     authorId: column.number ({ references: () => Author.columns.id }),
     body: column.text(),
-    creationDate: column.date(),
-    published: column.boolean(),
+    creationDate: column.date({ default: NOW }),
+    published: column.boolean({ default: false }),
   }
 })
 
