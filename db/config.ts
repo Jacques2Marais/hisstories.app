@@ -15,7 +15,8 @@ const Story = defineTable({
     title: column.text(),
     authorId: column.number ({ references: () => Author.columns.id }),
     body: column.text(),
-    creationDate: column.date()
+    creationDate: column.date(),
+    published: column.boolean(),
   }
 })
 
